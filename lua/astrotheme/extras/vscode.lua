@@ -875,17 +875,13 @@ local function token_colors(colors)
       syn.cyan
     ),
     scope("Parameter", { "variable.parameter", "meta.function.parameters variable" }, syn.orange),
-    scope(
-      "Property / member",
-      {
-        "variable.other.property",
-        "variable.other.object.property",
-        "support.type.property-name",
-        "meta.object-literal.key",
-        "meta.definition.property",
-      },
-      syn.red
-    ),
+    scope("Property / member", {
+      "variable.other.property",
+      "variable.other.object.property",
+      "support.type.property-name",
+      "meta.object-literal.key",
+      "meta.definition.property",
+    }, syn.red),
     scope(
       "Function",
       { "entity.name.function", "support.function", "meta.function-call", "meta.method-call" },
@@ -972,16 +968,12 @@ local function token_colors(colors)
     scope("JS/TS this / super", { "variable.language.this", "variable.language.super" }, syn.cyan),
     scope("JS/TS class", { "entity.name.type.class", "entity.name.class.js", "entity.name.class.ts" }, syn.blue),
     scope("JS/TS constructor", { "meta.class storage.modifier", "entity.name.function.constructor" }, syn.purple),
-    scope(
-      "TS type modifier",
-      {
-        "storage.type.ts",
-        "storage.type.tsx",
-        "keyword.operator.expression.typeof",
-        "keyword.operator.expression.instanceof",
-      },
-      syn.purple
-    ),
+    scope("TS type modifier", {
+      "storage.type.ts",
+      "storage.type.tsx",
+      "keyword.operator.expression.typeof",
+      "keyword.operator.expression.instanceof",
+    }, syn.purple),
     scope(
       "Python self",
       { "variable.parameter.function.language.special.self.python", "variable.language.special.self.python" },
