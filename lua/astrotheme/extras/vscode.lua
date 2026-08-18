@@ -4,16 +4,12 @@ local Color = require "astrotheme.lib.color"
 
 --- @param hex string
 --- @param opacity number
-local function alpha(hex, opacity)
-  return hex .. string.format("%02X", math.floor(opacity * 255 + 0.5))
-end
+local function alpha(hex, opacity) return hex .. string.format("%02X", math.floor(opacity * 255 + 0.5)) end
 
 --- @param src string
 --- @param dst string
 --- @param amount number
-local function blend(src, dst, amount)
-  return Color.new(src):blend(Color.new(dst), amount):tohex()
-end
+local function blend(src, dst, amount) return Color.new(src):blend(Color.new(dst), amount):tohex() end
 
 local function is_array(t)
   local i = 0
@@ -845,34 +841,98 @@ end
 local function token_colors(colors)
   local syn, ui = colors.syntax, colors.ui
   return {
-    scope("Comment", { "comment", "punctuation.definition.comment", "string.comment" }, syn.comment, { fontStyle = "italic" }),
-    scope("Doc comment", { "comment.block.documentation", "string.quoted.docstring" }, syn.comment, { fontStyle = "italic" }),
+    scope(
+      "Comment",
+      { "comment", "punctuation.definition.comment", "string.comment" },
+      syn.comment,
+      { fontStyle = "italic" }
+    ),
+    scope(
+      "Doc comment",
+      { "comment.block.documentation", "string.quoted.docstring" },
+      syn.comment,
+      { fontStyle = "italic" }
+    ),
     scope("String", { "string", "string.quoted", "string.template", "punctuation.definition.string" }, syn.green),
     scope("String escape", { "constant.character.escape", "string.escape", "constant.other.placeholder" }, syn.red),
     scope("Regexp", { "string.regexp", "constant.regexp" }, syn.green),
     scope("Number", { "constant.numeric", "constant.numeric.integer" }, syn.orange),
     scope("Float", { "constant.numeric.float", "constant.numeric.decimal" }, syn.yellow),
-    scope("Boolean / null", { "constant.language.boolean", "constant.language.null", "constant.language.nil", "constant.language.undefined" }, syn.orange),
-    scope("Constant", { "constant", "constant.language", "constant.other", "variable.other.constant", "support.constant" }, syn.yellow),
+    scope(
+      "Boolean / null",
+      { "constant.language.boolean", "constant.language.null", "constant.language.nil", "constant.language.undefined" },
+      syn.orange
+    ),
+    scope(
+      "Constant",
+      { "constant", "constant.language", "constant.other", "variable.other.constant", "support.constant" },
+      syn.yellow
+    ),
     scope("Variable", { "variable", "variable.other", "variable.other.readwrite", "identifier" }, syn.text),
-    scope("Builtin variable", { "variable.language", "variable.language.special", "support.variable", "variable.other.predefined" }, syn.cyan),
+    scope(
+      "Builtin variable",
+      { "variable.language", "variable.language.special", "support.variable", "variable.other.predefined" },
+      syn.cyan
+    ),
     scope("Parameter", { "variable.parameter", "meta.function.parameters variable" }, syn.orange),
-    scope("Property / member", { "variable.other.property", "variable.other.object.property", "support.type.property-name", "meta.object-literal.key", "meta.definition.property" }, syn.red),
-    scope("Function", { "entity.name.function", "support.function", "meta.function-call", "meta.method-call" }, syn.blue),
+    scope(
+      "Property / member",
+      {
+        "variable.other.property",
+        "variable.other.object.property",
+        "support.type.property-name",
+        "meta.object-literal.key",
+        "meta.definition.property",
+      },
+      syn.red
+    ),
+    scope(
+      "Function",
+      { "entity.name.function", "support.function", "meta.function-call", "meta.method-call" },
+      syn.blue
+    ),
     scope("Builtin function", { "support.function.builtin", "support.function.magic" }, syn.cyan),
     scope("Macro", { "entity.name.function.macro", "support.function.macro", "meta.preprocessor.macro" }, syn.yellow),
     scope("Keyword", { "keyword", "keyword.control", "keyword.other", "storage.modifier.async" }, syn.purple),
-    scope("Import", { "keyword.control.import", "keyword.control.from", "keyword.control.export", "keyword.other.import" }, syn.purple),
+    scope(
+      "Import",
+      { "keyword.control.import", "keyword.control.from", "keyword.control.export", "keyword.other.import" },
+      syn.purple
+    ),
     scope("Operator", { "keyword.operator", "punctuation.separator", "punctuation.accessor" }, syn.text),
     scope("Storage", { "storage", "storage.type", "storage.modifier" }, syn.blue),
-    scope("Type", { "entity.name.type", "entity.name.class", "entity.name.struct", "support.type", "support.class" }, syn.blue),
-    scope("Builtin type", { "support.type.builtin", "support.type.primitive", "storage.type.builtin", "storage.type.primitive" }, syn.yellow),
-    scope("Namespace / module", { "entity.name.namespace", "entity.name.scope-resolution", "entity.name.module", "support.module" }, syn.purple),
-    scope("Attribute / decorator", { "entity.other.attribute-name", "meta.decorator", "punctuation.decorator", "entity.name.function.decorator" }, syn.yellow),
+    scope(
+      "Type",
+      { "entity.name.type", "entity.name.class", "entity.name.struct", "support.type", "support.class" },
+      syn.blue
+    ),
+    scope(
+      "Builtin type",
+      { "support.type.builtin", "support.type.primitive", "storage.type.builtin", "storage.type.primitive" },
+      syn.yellow
+    ),
+    scope(
+      "Namespace / module",
+      { "entity.name.namespace", "entity.name.scope-resolution", "entity.name.module", "support.module" },
+      syn.purple
+    ),
+    scope(
+      "Attribute / decorator",
+      { "entity.other.attribute-name", "meta.decorator", "punctuation.decorator", "entity.name.function.decorator" },
+      syn.yellow
+    ),
     scope("Tag", { "entity.name.tag" }, syn.red),
     scope("Tag delimiter", { "punctuation.definition.tag" }, syn.text),
-    scope("Tag attribute", { "entity.other.attribute-name.html", "entity.other.attribute-name.xml", "meta.tag.attributes" }, syn.cyan),
-    scope("Punctuation", { "punctuation", "meta.brace", "punctuation.definition.block", "punctuation.section" }, syn.text),
+    scope(
+      "Tag attribute",
+      { "entity.other.attribute-name.html", "entity.other.attribute-name.xml", "meta.tag.attributes" },
+      syn.cyan
+    ),
+    scope(
+      "Punctuation",
+      { "punctuation", "meta.brace", "punctuation.definition.block", "punctuation.section" },
+      syn.text
+    ),
     scope("Invalid", { "invalid", "invalid.illegal" }, ui.red),
     scope("Deprecated", { "invalid.deprecated" }, ui.yellow, { fontStyle = "strikethrough" }),
     scope("URL", { "markup.underline.link", "*url*", "*link*", "*uri*" }, syn.blue, { fontStyle = "italic underline" }),
@@ -881,15 +941,29 @@ local function token_colors(colors)
     scope("Markup heading 2", { "markup.heading.2", "heading.2" }, syn.blue, { fontStyle = "bold" }),
     scope("Markup heading 3", { "markup.heading.3", "heading.3" }, syn.cyan, { fontStyle = "bold" }),
     scope("Markup heading 4", { "markup.heading.4", "heading.4" }, syn.green, { fontStyle = "bold" }),
-    scope("Markup heading 5-6", { "markup.heading.5", "markup.heading.6", "heading.5", "heading.6" }, syn.yellow, { fontStyle = "bold" }),
+    scope(
+      "Markup heading 5-6",
+      { "markup.heading.5", "markup.heading.6", "heading.5", "heading.6" },
+      syn.yellow,
+      { fontStyle = "bold" }
+    ),
     scope("Markup bold", { "markup.bold" }, syn.text, { fontStyle = "bold" }),
     scope("Markup italic", { "markup.italic" }, syn.text, { fontStyle = "italic" }),
     scope("Markup strikethrough", { "markup.strikethrough" }, syn.text, { fontStyle = "strikethrough" }),
     scope("Markup quote", { "markup.quote" }, syn.text, { fontStyle = "italic" }),
     scope("Markup raw", { "markup.inline.raw", "markup.raw.inline", "markup.fenced_code", "markup.raw" }, syn.red),
     scope("Markup list", { "markup.list", "punctuation.definition.list" }, syn.blue),
-    scope("Markup link text", { "string.other.link", "markup.underline.link.markdown", "meta.link.inline" }, syn.yellow, { fontStyle = "bold" }),
-    scope("JSON key", { "support.type.property-name.json", "meta.structure.dictionary.json support.type.property-name" }, syn.blue),
+    scope(
+      "Markup link text",
+      { "string.other.link", "markup.underline.link.markdown", "meta.link.inline" },
+      syn.yellow,
+      { fontStyle = "bold" }
+    ),
+    scope(
+      "JSON key",
+      { "support.type.property-name.json", "meta.structure.dictionary.json support.type.property-name" },
+      syn.blue
+    ),
     scope("CSS property", { "support.type.property-name.css", "meta.property-name.css" }, syn.orange),
     scope("CSS class", { "entity.other.attribute-name.class.css", "entity.other.attribute-name.class" }, syn.yellow),
     scope("CSS id", { "entity.other.attribute-name.id.css", "entity.other.attribute-name.id" }, syn.blue),
@@ -898,9 +972,26 @@ local function token_colors(colors)
     scope("JS/TS this / super", { "variable.language.this", "variable.language.super" }, syn.cyan),
     scope("JS/TS class", { "entity.name.type.class", "entity.name.class.js", "entity.name.class.ts" }, syn.blue),
     scope("JS/TS constructor", { "meta.class storage.modifier", "entity.name.function.constructor" }, syn.purple),
-    scope("TS type modifier", { "storage.type.ts", "storage.type.tsx", "keyword.operator.expression.typeof", "keyword.operator.expression.instanceof" }, syn.purple),
-    scope("Python self", { "variable.parameter.function.language.special.self.python", "variable.language.special.self.python" }, syn.cyan),
-    scope("Python decorator", { "entity.name.function.decorator.python", "punctuation.definition.decorator.python" }, syn.yellow),
+    scope(
+      "TS type modifier",
+      {
+        "storage.type.ts",
+        "storage.type.tsx",
+        "keyword.operator.expression.typeof",
+        "keyword.operator.expression.instanceof",
+      },
+      syn.purple
+    ),
+    scope(
+      "Python self",
+      { "variable.parameter.function.language.special.self.python", "variable.language.special.self.python" },
+      syn.cyan
+    ),
+    scope(
+      "Python decorator",
+      { "entity.name.function.decorator.python", "punctuation.definition.decorator.python" },
+      syn.yellow
+    ),
     scope("Rust type", { "entity.name.type.rust", "storage.type.rust" }, syn.cyan),
     scope("Rust module", { "entity.name.module.rust", "meta.import.rust" }, syn.purple),
     scope("Rust macro", { "entity.name.function.macro.rust", "support.function.macro.rust" }, syn.red),
@@ -915,7 +1006,12 @@ local function token_colors(colors)
     scope("TODO", { "keyword.todo" }, ui.yellow),
     scope("Unit", { "keyword.other.unit" }, syn.cyan),
     scope("JSDoc type", { "storage.type.class.jsdoc" }, syn.yellow),
-    scope("Special comment", { "comment.line.double-slash.documentation", "punctuation.definition.comment.documentation" }, ui.none_text, { fontStyle = "italic" }),
+    scope(
+      "Special comment",
+      { "comment.line.double-slash.documentation", "punctuation.definition.comment.documentation" },
+      ui.none_text,
+      { fontStyle = "italic" }
+    ),
   }
 end
 
